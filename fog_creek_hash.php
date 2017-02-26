@@ -12,10 +12,7 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
 
     $i = 0;
     $keyword_index_array = array();
-    if ($show_work == TRUE) {
-        print_r($target_hash);
-        echo "\n";
-    }
+   // ($show_work == TRUE) ? show_work($target_hash) : '';
 
     /* $target_hash is a multiplicative function of the
     length of the target keyword. Loop in reverse. */
@@ -42,26 +39,19 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
         }
 
         /**
-         * Once the right index is found, subtract it from the
+         * Once the correct index is found, subtract it from the
          * hash and divide by 37. Repeat until target keyword length
          * has been covered.
          */
 
         $step = $target_hash - $keyword_index_array[$i];
-        $target_hash = $step / 37;
+        $step2 = $step / 37;
+        ($show_work == TRUE) ? show_calc_steps($target_hash, $keyword_index_array[$i], $step, $step2) : '' ;
 
-        if ($show_work == TRUE) {
-            // Per Fog Creek's hashing function, the base multiplier
-            // should be "7".
-            if ($target_hash == 7) {
-                echo "Base multiplier 7 reached. \n";
-            } else {
-                print_r($target_hash);
-                echo "\n";
-            }
-
-        }
+        $target_hash = $step2;
         $i++;
+
+
     }
 
     // Map the index to letters.
@@ -69,6 +59,8 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
     foreach ($keyword_index_array as $key => $value) {
         // Reverse the order in which they're stored in $keyword_index_array.
         array_unshift($word, substr($allowed_characters, $value, 1));
+        ($show_work == TRUE) ? print( "[" .$value . "] => " . $word[0] . "\n"): '' ;
+
     }
 
     // Generate CLI-friendly output.
@@ -78,6 +70,14 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
     }
     echo ".\"\n";
 
+}
+
+function show_calc_steps($target_hash, $keyword_index, $step, $step2) {
+    // Per Fog Creek's hashing function, the base multiplier
+    // should be "7".
+
+    print (number_format($target_hash) . " - [" . $keyword_index . "] = " . number_format($step) . "\n" . number_format($step) ." / 37 = " . number_format($step2) . "\n");
+    echo "\n";
 }
 
 
