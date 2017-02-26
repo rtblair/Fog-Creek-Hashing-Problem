@@ -44,11 +44,11 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
          * has been covered.
          */
 
-        $step = $target_hash - $keyword_index_array[$i];
-        $step2 = $step / 37;
-        ($show_work == TRUE) ? show_calc_steps($target_hash, $keyword_index_array[$i], $step, $step2) : '' ;
+        $factor_of_hash_multiplier = $target_hash - $keyword_index_array[$i];
+        $quotient = $factor_of_hash_multiplier / 37;
+        ($show_work == TRUE) ? show_calc_steps($target_hash, $keyword_index_array[$i], $factor_of_hash_multiplier, $quotient) : '' ;
 
-        $target_hash = $step2;
+        $target_hash = $quotient;
         $i++;
 
 
@@ -60,23 +60,28 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
         // Reverse the order in which they're stored in $keyword_index_array.
         array_unshift($word, substr($allowed_characters, $value, 1));
         ($show_work == TRUE) ? print( "[" .$value . "] => " . $word[0] . "\n"): '' ;
-
     }
 
     // Generate CLI-friendly output.
-    echo "The keyword is \"";
+    echo "\nThe keyword is \"";
     foreach ($word as $key => $value) {
         echo $value;
     }
-    echo ".\"\n";
+    echo ".\"\n\n";
 
 }
 
-function show_calc_steps($target_hash, $keyword_index, $step, $step2) {
-    // Per Fog Creek's hashing function, the base multiplier
-    // should be "7".
 
-    print (number_format($target_hash) . " - [" . $keyword_index . "] = " . number_format($step) . "\n" . number_format($step) ." / 37 = " . number_format($step2) . "\n");
+/**
+ * A function for printing arithmetic steps in the CLI.
+ *
+ * @param $target_hash
+ * @param $keyword_index
+ * @param $factor_of_hash_multiplier
+ * @param $quotient
+ */
+function show_calc_steps($target_hash, $keyword_index, $factor_of_hash_multiplier, $quotient) {
+    print (number_format($target_hash) . " - [" . $keyword_index . "] = " . number_format($factor_of_hash_multiplier) . "\n" . number_format($factor_of_hash_multiplier) ." / 37 = " . number_format($quotient) . "\n");
     echo "\n";
 }
 
