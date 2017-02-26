@@ -3,10 +3,10 @@
 /**
  * Solves Fog Creek hashing question at http://www.fogcreek.com/jobs/SoftwareDeveloper.
  *
- * @param $target_hash           - the hash integer to solve for.
- * @param $allowed_characters    - domain of allowed characters
- * @param $target_keyword_length - number of letters the target keyword should be
- * @param bool $show_work        - determine whether calculation steps should be printed with output.
+ * @param $target_hash           Hash integer to solve for.
+ * @param $allowed_characters    Domain of allowed characters.
+ * @param $target_keyword_length Number of letters the target keyword should be.
+ * @param bool $show_work        Determine whether calculation steps should be printed with output.
  */
 function keyword_generator($target_hash = 945924806726376, $allowed_characters = 'acdegilmnoprstuw', $target_keyword_length = 9, $show_work = TRUE) {
 
@@ -36,7 +36,7 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
                 $allowed_character_iterator++;
             }
         }
-        
+
         // Once the right index is found, subtract it from the
         // hash and divide by 37. Repeat until target keyword length
         // has been covered.
