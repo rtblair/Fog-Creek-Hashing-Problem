@@ -17,16 +17,20 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
         echo "\n";
     }
 
-    // $target_hash is a multiplicative function of the
-    // length of the target keyword. Loop in reverse.
+    /* $target_hash is a multiplicative function of the
+    length of the target keyword. Loop in reverse. */
+
 
     while ($i <= ($target_keyword_length - 1)) {
         $allowed_character_iterator = 0;
         $allowed_character_length = strlen($allowed_characters);
 
-        // There are [$allowed_character_length] possible string indices to
-        // subtract from the hash before dividing by 37. Try each
-        // until one is found that is a factor of 37.
+        /**
+         * There are [$allowed_character_length] possible string indices
+         * to subtract from the hash before dividing by 37. Try each
+         * until one is found that is a factor of 37.
+         */
+
         while ($allowed_character_iterator < ($allowed_character_length - 1)) {
             $offset = $target_hash - $allowed_character_iterator;
             if ($offset % 37 == 0) {
@@ -37,9 +41,12 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
             }
         }
 
-        // Once the right index is found, subtract it from the
-        // hash and divide by 37. Repeat until target keyword length
-        // has been covered.
+        /**
+         * Once the right index is found, subtract it from the
+         * hash and divide by 37. Repeat until target keyword length
+         * has been covered.
+         */
+
         $step = $target_hash - $keyword_index_array[$i];
         $target_hash = $step / 37;
 
@@ -64,7 +71,7 @@ function keyword_generator($target_hash = 945924806726376, $allowed_characters =
         array_unshift($word, substr($allowed_characters, $value, 1));
     }
 
-    // CLI-friendly output.
+    // Generate CLI-friendly output.
     echo "The keyword is \"";
     foreach ($word as $key => $value) {
         echo $value;
