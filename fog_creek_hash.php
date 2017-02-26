@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Solves Fog Creek hashing question at http://www.fogcreek.com/jobs/SoftwareDeveloper.
+ * PHP solution to Fog Creek hashing question at http://www.fogcreek.com/jobs/SoftwareDeveloper.
  *
  * @param $target_hash           Hash integer to solve for.
  * @param $allowed_characters    Domain of allowed characters.
